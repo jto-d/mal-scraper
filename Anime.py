@@ -1,5 +1,4 @@
 from urllib.request import urlopen
-import codecs
 
 class Anime:
     def __init__(self, name, URL) -> None:
