@@ -38,13 +38,17 @@ URLs = [animeURL(URL) for URL in r_URLs]
 # print(len(URLs))
 # print(len(animes))
 
+index = 97
+# index = 0
+anime = Anime(animes[index], URLs[index])
+anime.anime_opening()
+# print("Title: " + anime.title + "\nArtist: " + anime.artist)
 
-
-
-for i in range(5):
-    anime = Anime(animes[i], URLs[i])
-    anime.anime_opening()
-    print("Title: " + anime.title + "\nArtist: " + anime.artist)
+# for i in range(5):
+#     anime = Anime(animes[i], URLs[i])
+#     anime.anime_opening()
+#     print(anime.title)
+    # print("Title: " + anime.title + "\nArtist: " + anime.artist)
 # print(animes)
 
 
