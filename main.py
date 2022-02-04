@@ -1,5 +1,3 @@
-import json
-import re
 from urllib.request import urlopen
 from Anime import Anime
 
@@ -23,7 +21,7 @@ def animeTitle(title):
     return anime_name
 
 animes = [animeTitle(title) for title in titles]
-# print(animes)
+
 
 r_URLs = text.split('"anime_url"')
 r_URLs.pop(0)
@@ -35,21 +33,19 @@ def animeURL(init_URL):
 
 URLs = [animeURL(URL) for URL in r_URLs]
 
-# print(len(URLs))
-# print(len(animes))
 
-index = 97
-# index = 0
-anime = Anime(animes[index], URLs[index])
-anime.anime_opening()
-# print("Title: " + anime.title + "\nArtist: " + anime.artist)
+for i in range(len(animes)):
+    anime = Anime(animes[i], URLs[i])
+    anime.anime_opening()
+    print(str(anime) + ":")        
+    if anime.titles != []:
+        for op in range(len(anime.titles)):
+            print("Opening " + str(op+1) + ": \n" + anime.titles[op] + "\n" + anime.artists[op] + "\n")
+    else:
+        print("No Openings\n")
 
-# for i in range(5):
-#     anime = Anime(animes[i], URLs[i])
-#     anime.anime_opening()
-#     print(anime.title)
-    # print("Title: " + anime.title + "\nArtist: " + anime.artist)
-# print(animes)
+
+
 
 
 
