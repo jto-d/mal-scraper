@@ -33,7 +33,8 @@ def animeURL(init_URL):
 
 URLs = [animeURL(URL) for URL in r_URLs]
 
-
+# IMPORTANT
+# LIKELY NEED TO ADD A TIMER BECAUSE OF RATE LIMITING
 for i in range(len(animes)):
     anime = Anime(animes[i], URLs[i])
     anime.anime_opening()
