@@ -4,10 +4,11 @@ from bs4 import BeautifulSoup
 import requests
 
 class Anime:
-    def __init__(self, name, URL) -> None:
+    def __init__(self, name, url, url_type) -> None:
         self.name = name
-        self.URL = URL
-        self.page = requests.get(self.URL)
+        self.url = url
+        self.page = requests.get(self.url)
+        self.url_type = url_type
 
         self.titles = []
         self.artists = []
