@@ -1,5 +1,6 @@
 from urllib.request import urlopen
 from Anime import Anime
+import time
 
 ANIME_LIST = 'https://myanimelist.net/animelist/Lxmonade?status=2'
 
@@ -33,20 +34,33 @@ def animeURL(init_URL):
 
 URLs = [animeURL(URL) for URL in r_URLs]
 
+# open txt file
+f = open('anime_openings_1.txt', 'w', encoding='utf-8')
+
+
+
 # IMPORTANT
 # LIKELY NEED TO ADD A TIMER BECAUSE OF RATE LIMITING
 for i in range(len(animes)):
     anime = Anime(animes[i], URLs[i])
-    anime.anime_opening()
-    print(str(anime) + ":")        
+    try:
+        anime.anime_opening()
+    except:
+        print('\nMAL LIMIT\n60 SECOND PAUSE\nINDEX NUMBER: ' + i + '\nSUBMIT MAL CHECK\n')
+        time.sleep(60)
+        anime.anime_opening()
+    f.write(str(anime)+'\n')
+    print(str(anime))        
     if anime.titles != []:
+        print("COMPLETING....")
         for op in range(len(anime.titles)):
-            print("Opening " + str(op+1) + ": \n" + anime.titles[op] + "\n" + anime.artists[op] + "\n")
+            f.write(str(op+1) + ': ' + anime.titles[op] + ' by ' + anime.artists[op] + '\n')
     else:
-        print("No Openings\n")
+        f.write("No Openings\n")
+        print("NO OPENINGS")
+    f.write('\n')
 
-
-
+f.close()
 
 
 
