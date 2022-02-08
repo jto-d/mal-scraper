@@ -1,38 +1,43 @@
-from urllib.request import urlopen
+
 from Anime import Anime
+from List import List
 import time
 
-ANIME_LIST = 'https://myanimelist.net/animelist/Lxmonade?status=2'
+lists = List('MAL', 'Lxmonade')
+lists.get_anime_list()
+print(lists.animes)
 
-text = urlopen(ANIME_LIST).read()
-text = text.decode("utf-8")
-text = text.replace("&quot;",'"')
+# ANIME_LIST = 'https://myanimelist.net/animelist/Lxmonade?status=2'
 
-titles = text.split('"anime_title"')
-titles.pop(0)
+# text = urlopen(ANIME_LIST).read()
+# text = text.decode("utf-8")
+# text = text.replace("&quot;",'"')
 
-def animeTitle(title):
-    anime_name = title.split('"')[1]
-    if anime_name == 'anime_title_eng':
-        return title.split(',',)[0][1:]
+# titles = text.split('"anime_title"')
+# titles.pop(0)
+
+# def animeTitle(title):
+#     anime_name = title.split('"')[1]
+#     if anime_name == 'anime_title_eng':
+#         return title.split(',',)[0][1:]
     
-    # apostrophe instead of text
-    if '&#039;' in anime_name:
-        return anime_name.replace('&#039;', "'")
-    return anime_name
+#     # apostrophe instead of text
+#     if '&#039;' in anime_name:
+#         return anime_name.replace('&#039;', "'")
+#     return anime_name
 
-animes = [animeTitle(title) for title in titles]
+# animes = [animeTitle(title) for title in titles]
 
 
-r_URLs = text.split('"anime_url"')
-r_URLs.pop(0)
+# r_URLs = text.split('"anime_url"')
+# r_URLs.pop(0)
 
-def animeURL(init_URL):
-    URL = init_URL.replace('\\','')
-    URL = URL.split('"')[1]
-    return "https://myanimelist.net" + URL
+# def animeURL(init_URL):
+#     URL = init_URL.replace('\\','')
+#     URL = URL.split('"')[1]
+#     return "https://myanimelist.net" + URL
 
-URLs = [animeURL(URL) for URL in r_URLs]
+# URLs = [animeURL(URL) for URL in r_URLs]
 
 # open txt file
 f = open('anime_openings_1.txt', 'w', encoding='utf-8')
